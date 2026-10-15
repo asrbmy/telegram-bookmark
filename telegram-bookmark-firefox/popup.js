@@ -26,7 +26,7 @@ function header() {
   const sel = st.profiles.length > 1 && h('select', { 'aria-label': 'Telegram group', onchange: async (e) => { await setState({ activeId: e.target.value }); await reload(); defaults(); render(); } },
     st.profiles.map((x) => h('option', { value: x.id, selected: x.id === p.id }, x.name)));
   return h('div', { class: 'top' },
-    h('div', { class: 'brand' }, h('span', { class: 'logo' }, icon('send', 15)), 'Telegram Saver'),
+    h('div', { class: 'brand' }, h('span', { class: 'logo' }, icon('send', 15)), 'Telegram Bookmark'),
     sel, h('button', { class: 'icon-btn', title: 'Settings', 'aria-label': 'Settings', onclick: () => { ext.runtime.openOptionsPage(); window.close(); } }, icon('sliders')));
 }
 

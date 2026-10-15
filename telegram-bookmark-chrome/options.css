@@ -25,3 +25,4 @@ body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 var(--font);-
 .toast.show{opacity:1;transform:translate(-50%,0)}
 code{padding:1px 6px;border-radius:5px;background:var(--fill);font-size:12.5px}
 @media (max-width:760px){#app{grid-template-columns:1fr}.side{position:static;height:auto}.row .ctl{width:100%}.content{padding:20px}}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}

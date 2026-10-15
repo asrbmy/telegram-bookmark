@@ -124,20 +124,27 @@ function history() {
   const out = result();
   return page('History', `${S.history.length} saved item(s).`,
     h('div', { class: 'btns' },
-      h('button', { class: 'btn', onclick: () => { const a = h('a', { href: URL.createObjectURL(new Blob([JSON.stringify(S.history, null, 2)], { type: 'application/json' })), download: 'telegram-saver-history.json' }); a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1000); } }, 'Export JSON'),
+      h('button', { class: 'btn', onclick: () => { const a = h('a', { href: URL.createObjectURL(new Blob([JSON.stringify(S.history, null, 2)], { type: 'application/json' })), download: 'telegram-bookmark-history.json' }); a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1000); } }, 'Export JSON'),
       h('button', { class: 'btn danger', onclick: async () => { if (!confirm('Clear all saved history?')) return; S.history = []; await setState({ history: [] }); toast('History cleared'); render(); } }, 'Clear history')), out);
 }
 
 function about() {
-  return page('About', `Telegram Saver ${ext.runtime.getManifest().version}`,
-    group(row('Privacy', h('div', { class: 'row-desc', style: 'max-width:380px' }, 'Your bot token, groups, rules and history are stored only in this browser. The extension talks only to api.telegram.org and, if you enable it, your own helper on 127.0.0.1. No analytics.')),
+  const link = (href, text) => h('a', { href, target: '_blank', rel: 'noopener noreferrer' }, text);
+  return page('About', `Telegram Bookmark ${ext.runtime.getManifest().version}`,
+    group(
+      row('Developed by', h('div', { class: 'row-desc', style: 'max-width:380px;text-align:right' }, 'asrbmy and linkwithiq')),
+      row('asrbmy', link('https://asrbmy.github.io', 'asrbmy.github.io')),
+      row('linkwithiq', link('https://linkwithiq.github.io', 'linkwithiq.github.io')),
+      row('Source code', link('https://github.com/asrbmy/telegram-bookmark', 'github.com/asrbmy/telegram-bookmark'))),
+    group(
+      row('Privacy', h('div', { class: 'row-desc', style: 'max-width:380px' }, 'Your bot token, groups, rules and history are stored only in this browser. The extension talks only to api.telegram.org and, if you enable it, your own helper on 127.0.0.1. No analytics.')),
       row('Tip', h('div', { class: 'row-desc', style: 'max-width:380px' }, 'Anyone with your bot token can control the bot. If it leaks, revoke it with /revoke in @BotFather.'))));
 }
 
 const VIEWS = { account, topics, rules, features, helper, history, about };
 function render() {
   app.replaceChildren(
-    h('nav', { class: 'side', 'aria-label': 'Settings sections' }, h('h1', {}, h('span', { class: 'logo' }, icon('send', 15)), 'Telegram Saver'),
+    h('nav', { class: 'side', 'aria-label': 'Settings sections' }, h('h1', {}, h('span', { class: 'logo' }, icon('send', 15)), 'Telegram Bookmark'),
       SECTIONS.map(([k, l]) => h('button', { 'aria-current': k === section ? 'page' : null, onclick: () => { section = k; render(); } }, l))),
     VIEWS[section]());
 }

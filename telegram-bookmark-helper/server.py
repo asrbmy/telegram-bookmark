@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Telegram Saver helper: downloads video/audio with yt-dlp and uploads it to your Telegram topic.
+"""Telegram Bookmark helper: downloads video/audio with yt-dlp and uploads it to your Telegram topic.
 
 Listens on 127.0.0.1 only and requires a secret. Usage: python server.py [--port 8765]
 """
@@ -78,7 +78,7 @@ def run_job(job):
     token, chat, thread = job["token"], job["chat_id"], job["thread_id"]
     base = {"chat_id": chat, "message_thread_id": thread}
     with SLOTS:
-        tmp = tempfile.mkdtemp(prefix="tgsaver-")
+        tmp = tempfile.mkdtemp(prefix="tgbookmark-")
         try:
             path = download(job["url"], job["kind"], tmp)
             mb = path.stat().st_size / 1048576
@@ -103,7 +103,7 @@ def run_job(job):
 
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = "TGSaver"
+    server_version = "TGBookmark"
 
     def log_message(self, *a):
         pass
@@ -163,7 +163,7 @@ class Handler(BaseHTTPRequestHandler):
 def load_secret(arg):
     if arg or os.environ.get("HELPER_SECRET"):
         return arg or os.environ["HELPER_SECRET"]
-    f = Path.home() / ".telegram-saver-secret"
+    f = Path.home() / ".telegram-bookmark-secret"
     if not f.exists():
         f.write_text(secrets.token_urlsafe(24))
         try:
@@ -185,7 +185,7 @@ def main():
         print("! yt-dlp is not installed. Run: python -m pip install -U yt-dlp")
     if not shutil.which("ffmpeg"):
         print("! ffmpeg not found. MP3 and merged video need it.")
-    print(f"Telegram Saver helper on http://127.0.0.1:{a.port}\nSecret (paste into the extension): {CFG['secret']}")
+    print(f"Telegram Bookmark helper on http://127.0.0.1:{a.port}\nSecret (paste into the extension): {CFG['secret']}")
     ThreadingHTTPServer(("127.0.0.1", a.port), Handler).serve_forever()
 
 

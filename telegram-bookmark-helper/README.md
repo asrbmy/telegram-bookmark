@@ -1,4 +1,4 @@
-# Telegram Saver helper
+# Telegram Bookmark helper
 
 Downloads YouTube (and 1000+ other sites) with yt-dlp and uploads the result to your Telegram topic.
 
@@ -21,3 +21,7 @@ The file appears in the chosen topic when ready. If it fails, the bot posts the 
 The public Bot API allows 50 MB. To send up to 2 GB, run your own Telegram Bot API server
 (https://github.com/tdlib/telegram-bot-api), log your bot out of the cloud API once (`/logOut`), then:
 `python server.py --api-base http://127.0.0.1:8081 --max-mb 1900`
+
+---
+Telegram Bookmark — developed by asrbmy and linkwithiq
+https://asrbmy.github.io · https://linkwithiq.github.io · https://github.com/asrbmy/telegram-bookmark
