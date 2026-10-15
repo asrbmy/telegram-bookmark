@@ -1,0 +1,27 @@
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 var(--font);-webkit-font-smoothing:antialiased}
+#app{display:grid;grid-template-columns:230px minmax(0,1fr);min-height:100vh}
+.side{position:sticky;top:0;align-self:start;height:100vh;padding:20px 12px;background:var(--surface);-webkit-backdrop-filter:blur(24px) saturate(180%);backdrop-filter:blur(24px) saturate(180%);border-right:1px solid var(--line)}
+.side h1{display:flex;align-items:center;gap:9px;margin:0 8px 18px;font-size:15px}
+.logo{display:grid;place-items:center;width:28px;height:28px;border-radius:8px;background:linear-gradient(#2aabee,#229ed9);color:#fff}
+.side button{display:block;width:100%;margin-bottom:2px;padding:8px 10px;border:0;border-radius:8px;background:transparent;text-align:left;cursor:pointer;font-weight:500}
+.side button:hover{background:var(--fill)}
+.side button[aria-current=page]{background:var(--accent);color:var(--accent-ink)}
+.content{max-width:680px;padding:32px 36px 80px}
+.content h2{margin:0 0 4px;font-size:24px;letter-spacing:-.01em}
+.sub{margin:0 0 20px;color:var(--mute)}
+.group{margin-bottom:18px;background:var(--solid);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 14px}
+.row+.row{border-top:1px solid var(--line)}
+.row-text{min-width:0;flex:1}.row-label{font-weight:500}.row-desc{color:var(--mute);font-size:12.5px}
+.row .ctl{width:260px;flex:none;display:flex;gap:6px}
+.row.stack{flex-direction:column;align-items:stretch}
+.grid3{display:grid;grid-template-columns:64px 1fr 120px auto;gap:8px;align-items:center;padding:10px 14px}
+.grid3+.grid3{border-top:1px solid var(--line)}
+.grid3.rules{grid-template-columns:1fr 180px auto}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.result{margin:0 0 18px;display:flex;flex-direction:column;gap:4px;font-size:13px}
+.result .ok{color:var(--ok)}.result .err{color:var(--err)}.result .warn{color:var(--warn)}
+.toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);padding:8px 16px;border-radius:999px;background:var(--ink);color:var(--bg);font-weight:500;opacity:0;pointer-events:none;transition:.2s}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+code{padding:1px 6px;border-radius:5px;background:var(--fill);font-size:12.5px}
+@media (max-width:760px){#app{grid-template-columns:1fr}.side{position:static;height:auto}.row .ctl{width:100%}.content{padding:20px}}
